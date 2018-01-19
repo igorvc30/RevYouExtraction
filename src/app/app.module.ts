@@ -17,6 +17,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AlertComponent } from './components/alert/alert.component';
 import { AlertService } from './services/alert-service';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { ProjectPipe } from './helpers/project-pipe';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
     NavbarComponent,
     ProjectCreateComponent,
     ProjectsComponent,
-    AlertComponent
+    AlertComponent,
+    ProjectPipe
   ],
   imports: [
     BrowserModule,

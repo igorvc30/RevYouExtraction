@@ -13,5 +13,7 @@ export class ReviewTypeService {
         return this.REVIEW_TYPES;
     }
 
-    
+    getReviewTypeName(reviewTypeCode : string) {
+        return this.REVIEW_TYPES.filter(reviewType => reviewType.code == reviewTypeCode)[0].name;
+    }   
 }

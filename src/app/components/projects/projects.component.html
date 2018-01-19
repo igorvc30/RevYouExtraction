@@ -21,7 +21,8 @@
     <div class="panel-body">
         <div class="form-group">
             <label for="tpReviewFilter">Review type</label>
-            <select id="tpReviewFilter" name="tpReviewFilter" class="form-control">
+            <select id="tpReviewFilter" name="tpReviewFilter" class="form-control" [(ngModel)]="filterProject.reviewType"
+            #tpReviewFilter>
           <option value="">All types</option>
           <ng-container *ngFor="let reviewType of reviewTypes">
               <option value="{{reviewType.code}}">{{reviewType.name}}</option>
@@ -32,13 +33,15 @@
           <!--  DsKey filter -->
           <div class="form-group">
             <label for="keyFilter">Key</label>
-            <input id="keyFilter" name="keyFilter" type="text" class="form-control">
+            <input id="keyFilter" name="keyFilter" type="text" class="form-control" 
+            [(ngModel)]="filterProject.key" #keyFilter>
           </div>
       
           <!-- DsTilte filter -->
           <div class="form-group">
             <label for="titleFilter">Title</label>
-            <input id="titleFilter" name="titleFilter" type="text" class="form-control">
+            <input id="titleFilter" name="titleFilter" type="text" class="form-control"
+            [(ngModel)]="filterProject.title" #titleFilter>
           </div>
     </div>
   </div>
@@ -55,9 +58,9 @@
           </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let project of projects">
+            <tr *ngFor="let project of projects | projectFilter : {key : keyFilter.value, title: titleFilter.value, reviewType : tpReviewFilter.value }">
                 <td></td>
-                <td>{{project.reviewType}}</td>
+                <td>{{getReviewTypeName(project.reviewType)}}</td>
                 <td>{{project.key}}</td>
                 <td>{{project.title}}</td>
                 <td>{{project.description}}</td>

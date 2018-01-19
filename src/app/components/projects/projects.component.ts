@@ -12,7 +12,7 @@ import { RouterHelper } from '../../helpers/router-helper';
   styleUrls: ['./projects.component.css']
 })
 export class ProjectsComponent implements OnInit {
-
+  filterProject = new Project();
   projects : [Project];
   reviewTypes = [] as [ReviewType];
   constructor(private router: Router,
@@ -36,5 +36,9 @@ export class ProjectsComponent implements OnInit {
       er =>{
     
     });
+  }
+
+  getReviewTypeName(reviewTypeCode : string) {
+    return this.reviewTypeService.getReviewTypeName(reviewTypeCode);
   }
 }
