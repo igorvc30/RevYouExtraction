@@ -1,0 +1,68 @@
+<h1 class="page-header">Projects</h1>
+<ol class="breadcrumb">
+  <li><a href="#">Home</a></li>
+  <li class="active"><a href="#">Projects</a></li>
+</ol>
+
+<div class="content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <button type="button" class="btn btn-primary" (click)="goToCreateNewProjectPage()">
+          <i class="fa fa-plus"></i> Create New Project
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Filter</div>
+    <div class="panel-body">
+        <div class="form-group">
+            <label for="tpReviewFilter">Review type</label>
+            <select id="tpReviewFilter" name="tpReviewFilter" class="form-control">
+          <option value="">All types</option>
+          <ng-container *ngFor="let reviewType of reviewTypes">
+              <option value="{{reviewType.code}}">{{reviewType.name}}</option>
+          </ng-container>
+        </select>
+          </div>
+      
+          <!--  DsKey filter -->
+          <div class="form-group">
+            <label for="keyFilter">Key</label>
+            <input id="keyFilter" name="keyFilter" type="text" class="form-control">
+          </div>
+      
+          <!-- DsTilte filter -->
+          <div class="form-group">
+            <label for="titleFilter">Title</label>
+            <input id="titleFilter" name="titleFilter" type="text" class="form-control">
+          </div>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Review Type</th>
+            <th>Key</th>
+            <th>Title</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let project of projects">
+                <td></td>
+                <td>{{project.reviewType}}</td>
+                <td>{{project.key}}</td>
+                <td>{{project.title}}</td>
+                <td>{{project.description}}</td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+

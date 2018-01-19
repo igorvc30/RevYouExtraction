@@ -1,0 +1,124 @@
+<h1 class="page-header">New Project</h1>
+<ol class="breadcrumb">
+  <li><a href="#">Home</a></li>
+  <li><a href="#">Projects</a></li>
+  <li class="active"><a href="#">New</a></li>
+</ol>
+<form #f="ngForm" (ngSubmit)="createProject()">
+
+  <div class="form-group" [ngClass]="{
+    'has-danger': reviewType.invalid  && (reviewType.touched || reviewType.dirty), 
+    'has-success': reviewType.valid  && (reviewType.touched || reviewType.dirty) 
+      }">
+    <label for="reviewType">Review type *</label>
+    <select id="reviewType" name="tp_review" class="form-control" required 
+    [(ngModel)]="project.reviewType" #reviewType="ngModel">
+      <option value="">All types</option>
+      <ng-container *ngFor="let reviewType of reviewTypes">
+          <option value="{{reviewType.code}}">{{reviewType.name}}</option>
+      </ng-container>
+    </select>
+    <div class="text-danger" 
+          *ngIf="reviewType.invalid && reviewType.dirty"> 
+          Review type is required.
+    </div>
+  </div>
+
+  <div class="form-group" [ngClass]="{
+    'has-danger': key.invalid  && (key.touched || key.dirty), 
+    'has-success': key.valid  && (key.touched || key.dirty) 
+      }">
+    <label for="key">Key * (You can not change after save)</label>
+    <input id="key" name="key"  maxlength="10" type="text"  class="form-control" required 
+    [(ngModel)]="project.key" #key="ngModel"/>
+    <div class="text-danger" 
+          *ngIf="key.invalid && key.dirty"> 
+            Key is required.
+    </div>
+  </div>
+  <div class="form-group" [ngClass]="{
+    'has-danger': title.invalid  && (title.touched || title.dirty), 
+    'has-success': title.valid  && (title.touched || title.dirty) 
+      }">
+    <label for="title">Title *</label>
+    <input type="text" name="title" id="title" 
+    class="form-control" required [(ngModel)]="project.title" #title="ngModel"/>
+    <div class="text-danger" 
+          *ngIf="title.invalid && title.dirty"> 
+            Title is required.
+    </div>
+  </div>
+  <div class="form-group" >
+    <label for="project">Description</label>
+    <textarea id="project" name="project"  class="form-control" rows="5" [(ngModel)]="project.description"></textarea>
+  </div>
+
+  <hr width=90%> 
+  <div class="form-group" [ngClass]="{
+    'has-danger': institutionCountry.invalid  && (institutionCountry.touched || institutionCountry.dirty), 
+    'has-success': institutionCountry.valid  && (institutionCountry.touched || institutionCountry.dirty) 
+      }">
+    <label for="institutionCountry">Institution Country *</label>
+    <select id="institutionCountry" name="institutionCountry" class="form-control" 
+      required #institutionCountry="ngModel" [(ngModel)]="project.institution.country">
+      <option value="">Select a country of institutuion</option>
+      <ng-container *ngFor="let country of countries">
+          <option value="{{country.id}}">{{country.name}}</option>
+      </ng-container>
+
+    </select>
+    <div class="text-danger" 
+          *ngIf="institutionCountry.invalid && institutionCountry.dirty"> 
+          Country is required.
+    </div>
+  </div>
+
+    <div class="form-group" [ngClass]="{
+      'has-danger': institutionName.invalid  && (institutionName.touched || institutionName.dirty), 
+      'has-success': institutionName.valid  && (institutionName.touched || institutionName.dirty) 
+        }">
+      <label for="institutionName">Institution Name *</label>
+      <input maxlength="200" type="text" name="institutionName" id="institutionName" 
+      class="form-control"  required 
+      [(ngModel)]="project.institution.name" #institutionName="ngModel"/>
+      <div class="text-danger" 
+          *ngIf="institutionName.invalid && institutionName.dirty"> 
+            Institution name is required.
+    </div>
+    </div>
+  
+    <div class="form-group" [ngClass]="{
+      'has-danger': institutionAbbr.invalid  && (institutionAbbr.touched || institutionAbbr.dirty), 
+      'has-success': institutionAbbr.valid  && (institutionAbbr.touched || institutionAbbr.dirty) 
+        }">
+      <label for="institutionAbbr">Institution Abbreviation *</label>
+      <input maxlength="10"  type="text" name="institutionAbbr" id="institutionAbbr" class="form-control" 
+      [(ngModel)]="project.institution.abbreviation" required #institutionAbbr="ngModel"/>
+      <div class="text-danger" 
+          *ngIf="institutionAbbr.invalid && institutionAbbr.dirty"> 
+            Institution abbreviation is required.
+    </div>
+    </div>
+    <div>
+      <button  class="btn btn-primary" type="submit" [disabled]="f.invalid || processing">
+          <ng-container *ngIf="processing">
+              <fa name="cog" animation="spin"></fa>Processing
+          </ng-container>
+        <ng-container *ngIf="!processing">
+            <i class="fa fa-check"></i>Save
+        </ng-container>
+      </button>
+        
+      <button type="button" class="btn btn-default" 
+      (click)="goToProjectsPage()">Cancel</button>
+    </div>
+</form>
+
+
+
+
+
+
+
+  
+
