@@ -1,0 +1,78 @@
+<h1 class="page-header">Setting Extraction</h1>
+<ol class="breadcrumb">
+  <li><a href="#">RevYou</a></li>
+  <li class="">Setting Extraction</li>
+</ol>
+<form class="form-group" #f="ngForm" >
+  <div class="panel panel-default">
+    <div class="panel-heading">Set Deadlines</div>
+      <div class="panel-body">
+        
+        <!-- Start Date -->
+        <div class="form-group col-md-3">
+          <label for="startDate">Start Date</label>
+          <input id="startDate" name="startDate" type="date" class="form-control"
+          [(ngModel)]="extraction.startDate">
+        </div>
+    
+        <div class="col-md-3"></div>
+        <!-- End Date -->
+        <div class="form-group col-md-3">
+          <label for="endDate">End Date</label>
+          <input id="endDate" name="endDate" type="date" class="form-control col-md-4"
+          [(ngModel)]="extraction.endDate">
+        </div>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">Set Extraction Method</div>
+      <div class="panel-body">
+
+          <div class="form-group" >
+          <!-- [ngClass]="{
+            'has-danger': method.invalid  && (method.touched || method.dirty), 
+            'has-success': method.valid  && (method.touched || method.dirty) 
+              }" -->
+              
+            <label for="method">Method *</label>
+            <!-- <select id="method" name="method" class="form-control" 
+              required #method="ngModel" [(ngModel)]="extraction.method">
+              <option value="">Select a method</option>
+              <ng-container *ngFor="let m of methods">
+                  <option value="{{m}}">{{m}}</option>
+              </ng-container>
+        
+            </select> -->
+
+            <select id="method" name="method" class="form-control" 
+              required #method="ngModel" [(ngModel)]="extraction.method">
+              <option value="">Select a method</option>
+              <ng-container *ngFor="let m of methods">
+                  <option value="{{m.id}}">{{m.name}}</option>
+              </ng-container>
+
+              
+        
+            </select>
+
+            {{extraction.method}}
+
+            <!-- <select >
+              <option *ngFor="let symbol of keys(symbols)"
+              [ngValue]="symbols[symbol]">{{symbol}}</option>
+            </select> -->
+
+            <!-- <select>
+              <option *ngFor="let country of countries" [ngValue]="country">{{country.name}}</option>
+            </select> -->
+
+            <!-- <div class="text-danger" 
+                  *ngIf="method.invalid && method.dirty"> 
+                  Method is required.
+            </div> -->
+          </div>
+
+      </div>
+  </div>
+</form>

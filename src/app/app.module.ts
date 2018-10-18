@@ -18,6 +18,7 @@ import { AlertComponent } from './components/alert/alert.component';
 import { AlertService } from './services/alert-service';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { ProjectPipe } from './helpers/project-pipe';
+import { ExtractionSettingComponent } from './components/extraction-setting/extraction-setting.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { ProjectPipe } from './helpers/project-pipe';
     ProjectCreateComponent,
     ProjectsComponent,
     AlertComponent,
-    ProjectPipe
+    ProjectPipe,
+    ExtractionSettingComponent
   ],
   imports: [
     BrowserModule,

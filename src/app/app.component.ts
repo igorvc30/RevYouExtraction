@@ -17,7 +17,7 @@ export class AppComponent {
   projectsRoute = RouterHelper.projectsRoute
 
   ngOnInit(){
-    this.router.navigate(['projects']);
+    this.router.navigate(['extractionsetting']);
   }
 
 }
