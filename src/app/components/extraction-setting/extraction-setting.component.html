@@ -25,6 +25,8 @@
     </div>
   </div>
 
+   <!-- Projecto utilizado para o multiselect -->
+  <!-- https://github.com/ng-select/ng-select -->
   <div class="panel panel-default">
     <div class="panel-heading">Set Extraction Method</div>
       <div class="panel-body">
@@ -50,10 +52,7 @@
               <option value="">Select a method</option>
               <ng-container *ngFor="let m of methods">
                   <option value="{{m.id}}">{{m.name}}</option>
-              </ng-container>
-
-              
-        
+              </ng-container>       
             </select>
 
             {{extraction.method}}
@@ -71,6 +70,19 @@
                   *ngIf="method.invalid && method.dirty"> 
                   Method is required.
             </div> -->
+          
+            <label>Multiselect with custom bindings</label>
+            <ng-select [items]="cities2"
+                       bindLabel="name"
+                       bindValue="id"
+                       [multiple]="true"
+                       placeholder="Select cities"
+                       [(ngModel)]="selectedCityIds">
+            </ng-select>
+            <p>
+                Selected cities: {{selectedCityIds}}
+            </p>
+          
           </div>
 
       </div>

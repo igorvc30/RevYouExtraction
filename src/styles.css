@@ -1,6 +1,7 @@
 /*
  * Base structure
  */
+ @import "~@ng-select/ng-select/themes/default.theme.css";
 
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {

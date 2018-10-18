@@ -19,7 +19,7 @@ import { AlertService } from './services/alert-service';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { ProjectPipe } from './helpers/project-pipe';
 import { ExtractionSettingComponent } from './components/extraction-setting/extraction-setting.component';
-
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -37,7 +37,8 @@ import { ExtractionSettingComponent } from './components/extraction-setting/extr
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
-    AngularFontAwesomeModule
+    AngularFontAwesomeModule,
+    NgSelectModule
   ],
   providers: [ProjectService, CountryService, ReviewTypeService, RestRepositoryService, AlertService],
   bootstrap: [AppComponent]
