@@ -8,8 +8,8 @@ export class Extraction {
     startDate: Date;
     endDate: Date;
     method: Number;
-    extractors: [String];
-    decisors: [String];
+    extractors: [Number];
+    decisors: [Number];
     amount: Number;
     score: Number;
     studyDetails: [String];

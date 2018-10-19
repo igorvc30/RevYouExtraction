@@ -9,15 +9,14 @@
       <div class="panel-body">
         
         <!-- Start Date -->
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-3 col-sm-6">
           <label for="startDate">Start Date</label>
           <input id="startDate" name="startDate" type="date" class="form-control"
           [(ngModel)]="extraction.startDate">
         </div>
     
-        <div class="col-md-3"></div>
         <!-- End Date -->
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-3 col-sm-6 col-md-offset-3">
           <label for="endDate">End Date</label>
           <input id="endDate" name="endDate" type="date" class="form-control col-md-4"
           [(ngModel)]="extraction.endDate">
@@ -37,7 +36,7 @@
             'has-success': method.valid  && (method.touched || method.dirty) 
               }" -->
               
-            <label for="method">Method *</label>
+            
             <!-- <select id="method" name="method" class="form-control" 
               required #method="ngModel" [(ngModel)]="extraction.method">
               <option value="">Select a method</option>
@@ -47,15 +46,14 @@
         
             </select> -->
 
-            <select id="method" name="method" class="form-control" 
-              required #method="ngModel" [(ngModel)]="extraction.method">
+            <!-- <select id="method" name="method" class="form-control" 
+              required #method="ngModel" [ngModel]="extraction?.method">
               <option value="">Select a method</option>
               <ng-container *ngFor="let m of methods">
-                  <option value="{{m.id}}">{{m.name}}</option>
+                  <option value="{{m.id}}" name="op">{{m.name}}</option>
               </ng-container>       
-            </select>
+            </select> -->
 
-            {{extraction.method}}
 
             <!-- <select >
               <option *ngFor="let symbol of keys(symbols)"
@@ -71,20 +69,49 @@
                   Method is required.
             </div> -->
           
-            <label>Multiselect with custom bindings</label>
-            <ng-select [items]="cities2"
+            <div class="form-group col-md-4 col-sm-6">
+                <label for="method">Methods</label>
+                <ng-select [items]="methods"
+                           bindLabel="name"
+                           bindValue="id"
+                           [multiple]="false"
+                           placeholder="Choose Method"
+                           [(ngModel)]="extraction.method"
+                           name="method">
+                </ng-select>
+              </div>
+            
+
+          <div class="form-group col-md-4 col-sm-6">
+            <label for="extractors">Extractors</label>
+            <ng-select [items]="extractors"
                        bindLabel="name"
                        bindValue="id"
                        [multiple]="true"
-                       placeholder="Select cities"
-                       [(ngModel)]="selectedCityIds">
+                       placeholder="Choose Extractors"
+                       [(ngModel)]="extraction.extractors"
+                       name="extractors">
             </ng-select>
-            <p>
-                Selected cities: {{selectedCityIds}}
-            </p>
-          
+          </div>
+          <div class="form-group col-md-4 col-sm-6">
+            <label for="decisors">Decisors</label>
+            <ng-select [items]="extractors"
+                       bindLabel="name"
+                       bindValue="id"
+                       [multiple]="true"
+                       placeholder="Choose Decisors"
+                       [(ngModel)]="extraction.decisors"
+                       name="decisors">
+            </ng-select>
           </div>
 
+          <div class="form-group col-md-4 col-sm-6">
+              <label for="amount">Extraction Amount</label>
+              <input id="amount" name="amount" type="number" class="form-control"
+              [(ngModel)]="extraction.amount">
+            </div>
+        </div>
+{{extraction.toString()}}
       </div>
   </div>
 </form>

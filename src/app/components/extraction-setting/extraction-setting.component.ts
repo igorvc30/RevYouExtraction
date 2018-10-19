@@ -21,7 +21,7 @@ export class ExtractionSettingComponent implements OnInit {
     {id: 634343, name: "Simone"}
   ];
 
-  selectedCityIds: string[];
+  selectedCityIds: any[];
 
   cities = [
     {id: 1, name: 'Vilnius'},
