@@ -21,25 +21,47 @@ export class ExtractionSettingComponent implements OnInit {
     {id: 634343, name: "Simone"}
   ];
 
-  selectedCityIds: any[];
+  attributes = [ 
+    {name:"copyright", id: 0}, 
+    {name:"title", id: 2},
+    {name:"journal", id: 3}, 
+    {name:"author", id: 4}, 
+    {name:"volume", id: 5}, 
+    {name:"year", id: 6}, 
+    {name:"pages", id: 7}, 
+    {name:"issn_isbn", id: 8}, 
+    {name:"address", id: 9}, 
+    {name:"abstract", id: 10}, 
+    {name:"keywords", id: 11}, 
+    {name:"URL", id: 12},
+    {name:"authros", id: 13} 
+  ];
 
-  cities = [
-    {id: 1, name: 'Vilnius'},
-    {id: 2, name: 'Kaunas'},
-    {id: 3, name: 'Pavilnys', disabled: true},
-    {id: 4, name: 'Pabradė'},
-    {id: 5, name: 'Klaipėda'}
-];
-  
   extraction = new Extraction();
-
   // keys = Object.keys;
   // symbols = Method;
+  studyDetails: String[] = [];
 
   @ViewChild('f') form: any;
   constructor() { }
 
   ngOnInit() {}
 
+  print(){
+
+    this.extraction.studyDetails = this.studyDetails;
+    console.log( JSON.stringify(this.extraction))
+    console.log( JSON.stringify(this.extraction.studyDetails))
+  }
+
+  onChange(attr:string, isChecked: boolean) {
+    if(isChecked) {
+      this.studyDetails.push(attr);
+    } else {
+      let index = this.studyDetails.indexOf(attr);
+      this.studyDetails.splice(index,1);
+    }
+    // this.extraction.studyDetails = this.studyDetails
+}
 
 }

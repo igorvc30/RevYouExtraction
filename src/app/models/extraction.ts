@@ -12,11 +12,11 @@ export class Extraction {
     decisors: [Number];
     amount: Number;
     score: Number;
-    studyDetails: [String];
+    // studyDetails: [String];
+    studyDetails: String[] = [];
     supportData: Boolean;
     extractionPilot: Boolean;
 
-    constructor(){
-    }
+    constructor(){}
 
 }

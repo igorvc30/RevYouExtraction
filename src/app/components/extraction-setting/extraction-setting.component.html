@@ -12,14 +12,14 @@
         <div class="form-group col-md-3 col-sm-6">
           <label for="startDate">Start Date</label>
           <input id="startDate" name="startDate" type="date" class="form-control"
-          [(ngModel)]="extraction.startDate">
+          [(ngModel)]="extraction.startDate" min="2018-10-02" max="2098-10-02">
         </div>
     
         <!-- End Date -->
         <div class="form-group col-md-3 col-sm-6 col-md-offset-3">
           <label for="endDate">End Date</label>
           <input id="endDate" name="endDate" type="date" class="form-control col-md-4"
-          [(ngModel)]="extraction.endDate">
+          [(ngModel)]="extraction.endDate" min="2018-10-02" max="2098-10-02">
         </div>
     </div>
   </div>
@@ -111,7 +111,34 @@
               [(ngModel)]="extraction.amount">
             </div>
         </div>
-{{extraction.toString()}}
+{{extraction | json}}
       </div>
   </div>
+
+
+
+  <div class="panel panel-default">
+    <div class="panel-heading">Set Extraction Method</div>
+      <div class="panel-body">
+
+          <div class="form-group" >
+            <div class="form-check checkbox-inline col-md-2 col-sm-3" 
+                  *ngFor="let attr of attributes" style="margin-left:0px">
+                <input class="form-check-input" (change)="onChange(attr.name, $event.target.checked)"name="{{ attr.name }}" type="checkbox" id="{{attr.name}}">
+                <label class="form-check-label" for="{{attr.name}}">
+                    {{attr.name}}
+                </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+  {{studyDetails | json}}
+
+
+
+
+  <button type="button" (click)="print" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"> Back</span></button>
+  <button type="button" (click)="print()" class="btn btn-success pull-right"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"> Save</span></button>
 </form>
