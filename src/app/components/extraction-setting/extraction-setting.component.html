@@ -109,7 +109,17 @@
               <label for="amount">Extraction Amount</label>
               <input id="amount" name="amount" type="number" class="form-control"
               [(ngModel)]="extraction.amount">
+          </div>
+          <div class="form-group col-md-4 col-sm-6">
+            <label for="score">Score</label>
+            <div class="slidecontainer">
+              <input type="range" min="1" max="5" value="1" class="slider" name="score"
+                id="score" [(ngModel)]="extraction.score">
             </div>
+            x Wins x  y Loses
+          </div>
+          
+
         </div>
 {{extraction | json}}
       </div>
@@ -133,11 +143,37 @@
         </div>
       </div>
 
+      <div class="panel panel-default">
+          <div class="panel-heading">Advanced Bias Reduction Settings</div>
+            <div class="panel-body">
+      
+              <div class="form-group" >
+                  <div class="form-group col-md-6 col-sm-12">
+                      <label>Allow Support Data Extraction Procedure?</label><br>
+                      <label class="form-check">
+                          <input class="form-check-input" type="radio" name="supportData" [value]="true" [(ngModel)]="extraction.supportData">
+                          Yes
+                        </label>
+                      <label class="form-check" style="margin-left:100px;">
+                          <input class="form-check-input" type="radio" name="supportData" [value]="false" [(ngModel)]="extraction.supportData">
+                          No
+                        </label>
+                  </div>
 
-  {{studyDetails | json}}
-
-
-
+                  <div class="form-group col-md-6 col-sm-12">
+                    <label>Perform a data extraction pilot?</label><br>
+                    <label class="form-check">
+                      <input class="form-check-input" type="radio" name="extractionPilot" [value]="true" [(ngModel)]="extraction.extractionPilot">
+                        Yes
+                      </label>
+                      <label class="form-check" style="margin-left:100px;">
+                        <input class="form-check-input" type="radio" name="extractionPilot" [value]="false" [(ngModel)]="extraction.extractionPilot">
+                        No
+                      </label>
+                    </div>
+                </div>
+            </div>
+      </div>
 
   <button type="button" (click)="print" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"> Back</span></button>
   <button type="button" (click)="print()" class="btn btn-success pull-right"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"> Save</span></button>

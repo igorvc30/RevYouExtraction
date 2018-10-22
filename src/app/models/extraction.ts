@@ -12,8 +12,7 @@ export class Extraction {
     decisors: [Number];
     amount: Number;
     score: Number;
-    // studyDetails: [String];
-    studyDetails: String[] = [];
+    studyDetails: Array<String> = [];
     supportData: Boolean;
     extractionPilot: Boolean;
 

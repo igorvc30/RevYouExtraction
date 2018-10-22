@@ -38,30 +38,23 @@ export class ExtractionSettingComponent implements OnInit {
   ];
 
   extraction = new Extraction();
-  // keys = Object.keys;
-  // symbols = Method;
-  studyDetails: String[] = [];
-
+  
   @ViewChild('f') form: any;
   constructor() { }
 
   ngOnInit() {}
 
   print(){
-
-    this.extraction.studyDetails = this.studyDetails;
     console.log( JSON.stringify(this.extraction))
-    console.log( JSON.stringify(this.extraction.studyDetails))
   }
 
   onChange(attr:string, isChecked: boolean) {
     if(isChecked) {
-      this.studyDetails.push(attr);
+      this.extraction.studyDetails.push(attr);
     } else {
-      let index = this.studyDetails.indexOf(attr);
-      this.studyDetails.splice(index,1);
+      let index = this.extraction.studyDetails.indexOf(attr);
+      this.extraction.studyDetails.splice(index,1);
     }
-    // this.extraction.studyDetails = this.studyDetails
 }
 
 }
