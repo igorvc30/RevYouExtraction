@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Extraction } from '../../models/extraction'
+import { Options } from 'ng5-slider';
 
 @Component({
   selector: 'app-extraction-setting',
@@ -7,6 +8,24 @@ import { Extraction } from '../../models/extraction'
   styleUrls: ['./extraction-setting.component.css']
 })
 export class ExtractionSettingComponent implements OnInit {
+
+  extraction = new Extraction();
+  processing = false
+
+  /* Configurating score slider*/
+  // minValue: number = 0;
+  // maxValue: number = 4;
+  options: Options = {
+    // ceil: this.extraction.amount,
+    ceil: 4,
+    // maxLimit: ,
+    step: 1,
+    showSelectionBar: true,
+    selectionBarGradient: {
+      from: 'white',
+      to: '#0F0'
+    }
+  };
 
   methods = [
     {id: 1, name: "Collaborative Comparing"},
@@ -36,17 +55,11 @@ export class ExtractionSettingComponent implements OnInit {
     {name:"URL", id: 12},
     {name:"authros", id: 13} 
   ];
-
-  extraction = new Extraction();
   
   @ViewChild('f') form: any;
   constructor() { }
 
   ngOnInit() {}
-
-  print(){
-    console.log( JSON.stringify(this.extraction))
-  }
 
   onChange(attr:string, isChecked: boolean) {
     if(isChecked) {
@@ -55,6 +68,23 @@ export class ExtractionSettingComponent implements OnInit {
       let index = this.extraction.studyDetails.indexOf(attr);
       this.extraction.studyDetails.splice(index,1);
     }
+}
+
+setExtractionSetting(){
+  if(this.form.valid){
+    this.processing = true;
+    console.log( JSON.stringify(this.extraction))
+   /** this.projectService.createProject(this.project).subscribe(response =>{
+      this.processing = false;
+      console.log(response);
+      if(response.type == WebApiResponseType.SUCCESS){
+        this.alertService.success(response.description, true);
+        this.goToProjectsPage();
+      }else{
+        this.alertService.error(response.description, false);
+      }
+    }); */
+  }
 }
 
 }

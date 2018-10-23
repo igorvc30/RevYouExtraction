@@ -3,7 +3,7 @@
   <li><a href="#">RevYou</a></li>
   <li class="">Setting Extraction</li>
 </ol>
-<form class="form-group" #f="ngForm" >
+<form class="form-group" #f="ngForm" (ngSubmit)="setExtractionSetting()">
   <div class="panel panel-default">
     <div class="panel-heading">Set Deadlines</div>
       <div class="panel-body">
@@ -112,16 +112,15 @@
           </div>
           <div class="form-group col-md-4 col-sm-6">
             <label for="score">Score</label>
-            <div class="slidecontainer">
-              <input type="range" min="1" max="5" value="1" class="slider" name="score"
+            <!-- <div class="slidecontainer">
+              <input type="range"  value="1" class="slider" name="score"
                 id="score" [(ngModel)]="extraction.score">
-            </div>
-            x Wins x  y Loses
+            </div> -->
+            {{extraction.score}} Wins x  y Loses
+            <ng5-slider [(value)]="extraction.score" name="score" 
+            [options]="options"></ng5-slider>
           </div>
-          
-
         </div>
-{{extraction | json}}
       </div>
   </div>
 
@@ -176,5 +175,14 @@
       </div>
 
   <button type="button" (click)="print" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"> Back</span></button>
-  <button type="button" (click)="print()" class="btn btn-success pull-right"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"> Save</span></button>
+ 
+  
+  <button  class="btn btn-primary pull-right" type="submit" [disabled]="f.invalid || processing">
+    <ng-container *ngIf="processing">
+        <fa name="cog" animation="spin"></fa> Processing
+    </ng-container>
+  <ng-container *ngIf="!processing">
+      <i class="fa fa-check"></i>  Save
+  </ng-container>
+</button>
 </form>

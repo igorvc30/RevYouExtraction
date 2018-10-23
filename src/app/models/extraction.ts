@@ -7,11 +7,11 @@
 export class Extraction {
     startDate: Date;
     endDate: Date;
-    method: Number;
-    extractors: [Number];
-    decisors: [Number];
-    amount: Number;
-    score: Number;
+    method: number;
+    extractors: Array<number> = [];
+    decisors: [number];
+    amount: number = 0;
+    score: number = 0;
     studyDetails: Array<String> = [];
     supportData: Boolean;
     extractionPilot: Boolean;
