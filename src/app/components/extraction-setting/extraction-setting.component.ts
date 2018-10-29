@@ -1,7 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, EventEmitter } from '@angular/core';
 import { Extraction } from '../../models/extraction'
-import { Options } from 'ng5-slider';
-
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-extraction-setting',
   templateUrl: './extraction-setting.component.html',
@@ -11,21 +10,8 @@ export class ExtractionSettingComponent implements OnInit {
 
   extraction = new Extraction();
   processing = false
+  id: number;
 
-  /* Configurating score slider*/
-  // minValue: number = 0;
-  // maxValue: number = 4;
-  options: Options = {
-    // ceil: this.extraction.amount,
-    ceil: 4,
-    // maxLimit: ,
-    step: 1,
-    showSelectionBar: true,
-    selectionBarGradient: {
-      from: 'white',
-      to: '#0F0'
-    }
-  };
 
   methods = [
     {id: 1, name: "Collaborative Comparing"},
@@ -57,7 +43,9 @@ export class ExtractionSettingComponent implements OnInit {
   ];
   
   @ViewChild('f') form: any;
-  constructor() { }
+  constructor(private route: ActivatedRoute) {
+    route.params.subscribe(_ => this.id = _.id);
+  }
 
   ngOnInit() {}
 

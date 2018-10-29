@@ -7,9 +7,31 @@ import { RouterHelper } from './helpers/router-helper';
 
 
 const routes: Routes = [
+  { path: "", component: ProjectCreateComponent },
   { path: RouterHelper.newProjectRoute, component: ProjectCreateComponent },
   { path: RouterHelper.projectsRoute, component: ProjectsComponent },
-  { path: RouterHelper.extractionSetting, component: ExtractionSettingComponent}
+  { path:':id',
+    children: [
+      { 
+        path: RouterHelper.extraction,
+        children: [
+          {
+            path: '**',
+            redirectTo: RouterHelper.setting,
+            pathMatch: 'full'
+          },
+          {
+            path: "",
+            component: ExtractionSettingComponent 
+          },
+          {
+            path: RouterHelper.setting,
+            component: ExtractionSettingComponent 
+          },
+        ] 
+      }
+    ]
+  }
 ];
 
 

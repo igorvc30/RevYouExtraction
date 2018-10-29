@@ -21,8 +21,8 @@ import { ProjectPipe } from './helpers/project-pipe';
 import { ExtractionSettingComponent } from './components/extraction-setting/extraction-setting.component';
 // https://github.com/ng-select/ng-select
 import { NgSelectModule } from '@ng-select/ng-select';
-// https://angular-slider.github.io/ng5-slider/
-import { Ng5SliderModule } from 'ng5-slider';
+
+
 
 @NgModule({
   declarations: [
@@ -42,7 +42,7 @@ import { Ng5SliderModule } from 'ng5-slider';
     HttpClientModule,
     AngularFontAwesomeModule,
     NgSelectModule,
-    Ng5SliderModule
+
   ],
   providers: [ProjectService, CountryService, ReviewTypeService, RestRepositoryService, AlertService],
   bootstrap: [AppComponent]

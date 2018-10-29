@@ -15,6 +15,7 @@ export class ProjectsComponent implements OnInit {
   filterProject = new Project();
   projects : [Project];
   reviewTypes = [] as [ReviewType];
+  
   constructor(private router: Router,
     private route: ActivatedRoute,
     private projectService: ProjectService,

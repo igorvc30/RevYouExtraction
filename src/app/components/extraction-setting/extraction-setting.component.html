@@ -1,7 +1,7 @@
-<h1 class="page-header">Setting Extraction</h1>
+<h1 class="page-header">Setting Extraction {{id}}</h1>
 <ol class="breadcrumb">
   <li><a href="#">RevYou</a></li>
-  <li class="">Setting Extraction</li>
+  <li class="">Setting Extraction {{id}}</li>
 </ol>
 <form class="form-group" #f="ngForm" (ngSubmit)="setExtractionSetting()">
   <div class="panel panel-default">
@@ -117,8 +117,7 @@
                 id="score" [(ngModel)]="extraction.score">
             </div> -->
             {{extraction.score}} Wins x  y Loses
-            <ng5-slider [(value)]="extraction.score" name="score" 
-            [options]="options"></ng5-slider>
+
           </div>
         </div>
       </div>

@@ -1,5 +1,6 @@
 export  class RouterHelper {
     static readonly projectsRoute = "projects";
     static readonly newProjectRoute = "newproject";
-    static readonly extractionSetting = "extractionsetting"
+    static readonly extraction = "extraction"
+    static readonly setting = "setting"
 }

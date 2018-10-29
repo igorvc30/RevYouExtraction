@@ -14,10 +14,11 @@ export class AppComponent {
 
   }
 
-  projectsRoute = RouterHelper.projectsRoute
+  routes = RouterHelper 
+  
 
   ngOnInit(){
-    this.router.navigate(['extractionsetting']);
+    // this.router.navigate([this.routes.extraction,this.routes.setting]);
   }
 
 }
