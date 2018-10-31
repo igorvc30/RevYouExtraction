@@ -1,7 +1,7 @@
-<h1 class="page-header">Setting Extraction {{id}}</h1>
+<h1 class="page-header">Setting Extraction #{{id}}</h1>
 <ol class="breadcrumb">
   <li><a href="#">RevYou</a></li>
-  <li class="">Setting Extraction {{id}}</li>
+  <li class="">Extraction Setting #{{id}}</li>
 </ol>
 <form class="form-group" #f="ngForm" (ngSubmit)="setExtractionSetting()">
   <div class="panel panel-default">
@@ -119,7 +119,7 @@
             </div>
             <!-- {{extraction.score}} Wins x  y Loses -->
             <div class="input-group">
-              <input type="number" class="form-control" placeholder="Number of wins" 
+              <input type="number" class="form-control" placeholder="Number of wins" name="score"
               aria-describedby="basic-addon2" [max]="extraction.amount" min="0" [(ngModel)]="extraction.score">
               <span class="input-group-addon" id="basic-addon2">Wins</span>
             </div>

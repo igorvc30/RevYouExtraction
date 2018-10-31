@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-extraction-distribution',
@@ -7,7 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExtractionDistributionComponent implements OnInit {
 
-  constructor() { }
+  id:number;
+  constructor(private route: ActivatedRoute) {
+    route.params.subscribe(_ => this.id = _.id);
+  }
 
   ngOnInit() {
   }
