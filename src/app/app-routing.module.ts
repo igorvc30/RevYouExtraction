@@ -4,6 +4,8 @@ import { ProjectCreateComponent } from './components/project-create/project-crea
 import { ProjectsComponent } from './components/projects/projects.component';
 import { ExtractionSettingComponent } from './components/extraction-setting/extraction-setting.component'
 import { RouterHelper } from './helpers/router-helper';
+import { ExtractionDistributionComponent } from './components/extraction-distribution/extraction-distribution.component';
+
 
 
 const routes: Routes = [
@@ -28,8 +30,13 @@ const routes: Routes = [
             path: RouterHelper.setting,
             component: ExtractionSettingComponent 
           },
+          {
+            path: RouterHelper.distribution,
+            component: ExtractionDistributionComponent
+          }
         ] 
       }
+      
     ]
   }
 ];

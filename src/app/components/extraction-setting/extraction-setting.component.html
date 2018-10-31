@@ -112,11 +112,17 @@
           </div>
           <div class="form-group col-md-4 col-sm-6">
             <label for="score">Score</label>
-            <!-- <div class="slidecontainer">
+            <div class="slidecontainer"> 
+              <span class="pull-right">{{extraction.score}} Wins</span>
               <input type="range"  value="1" class="slider" name="score"
-                id="score" [(ngModel)]="extraction.score">
-            </div> -->
-            {{extraction.score}} Wins x  y Loses
+                id="score" [(ngModel)]="extraction.score" [max]="extraction.amount" min="0">
+            </div>
+            <!-- {{extraction.score}} Wins x  y Loses -->
+            <div class="input-group">
+              <input type="number" class="form-control" placeholder="Number of wins" 
+              aria-describedby="basic-addon2" [max]="extraction.amount" min="0" [(ngModel)]="extraction.score">
+              <span class="input-group-addon" id="basic-addon2">Wins</span>
+            </div>
 
           </div>
         </div>

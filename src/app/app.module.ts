@@ -21,6 +21,7 @@ import { ProjectPipe } from './helpers/project-pipe';
 import { ExtractionSettingComponent } from './components/extraction-setting/extraction-setting.component';
 // https://github.com/ng-select/ng-select
 import { NgSelectModule } from '@ng-select/ng-select';
+import { ExtractionDistributionComponent } from './components/extraction-distribution/extraction-distribution.component';
 
 
 
@@ -32,7 +33,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     ProjectsComponent,
     AlertComponent,
     ProjectPipe,
-    ExtractionSettingComponent
+    ExtractionSettingComponent,
+    ExtractionDistributionComponent
   ],
   imports: [
     BrowserModule,
