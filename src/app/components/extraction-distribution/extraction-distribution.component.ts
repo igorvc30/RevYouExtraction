@@ -14,7 +14,35 @@ export class ExtractionDistributionComponent implements OnInit {
     route.params.subscribe(_ => this.id = _.id);
   }
 
+  distribution = [];
+
   ngOnInit() {
+  }
+
+  extractors = [
+    {id: 4343, name: "Antônio"},
+    {id: 54332, name: "Edmo"},
+    {id: 34343, name: "Igor"},
+    {id: 6343, name: "Simone"}
+  ];
+
+  articles = [
+    {id: 172, title: "Formalizing a Systematic Review Updating Process"},
+    {id: 151, title:"Linked data approach for selection process automation in systematic reviews"},
+    {id: 12, title:"A Visual Text Mining approach for Systematic Reviews"},
+    {id: 15, title:"Investigating the Use of a Hybrid Search Strategy for Systematic Reviews"},
+    {id: 512, title:"Search Engine Overlaps : Do they agree or disagree?"},
+    {id: 112, title:"Systematic literature reviews in software engineering: Preliminary results from interviews with researchers"},
+    {id: 72, title:"Motivation to Perform Systematic Reviews and their Impact on Software Engineering Practice"},
+    {id: 142, title:"Repeatability of systematic literature reviews"},
+    {id: 212, title:"Data Sampling and Supervised Learning for HIV Literature Screening"}
+  ];
+
+  onChange(extractor:string, article:string, isChecked: boolean) {
+    if(isChecked){
+      this.distribution[extractor].push(article);
+    }
+    console.log(extractor + ":::" + article + ":::" + isChecked)
   }
 
 }

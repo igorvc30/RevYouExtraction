@@ -56,7 +56,7 @@ export class ExtractionSettingComponent implements OnInit {
       let index = this.extraction.studyDetails.indexOf(attr);
       this.extraction.studyDetails.splice(index,1);
     }
-}
+  }
 
 setExtractionSetting(){
   if(this.form.valid){
