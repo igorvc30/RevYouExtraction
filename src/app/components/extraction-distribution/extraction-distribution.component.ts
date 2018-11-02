@@ -14,10 +14,7 @@ export class ExtractionDistributionComponent implements OnInit {
     route.params.subscribe(_ => this.id = _.id);
   }
 
-  distribution = [];
-
-  ngOnInit() {
-  }
+  distribution = {};
 
   extractors = [
     {id: 4343, name: "Antônio"},
@@ -25,6 +22,10 @@ export class ExtractionDistributionComponent implements OnInit {
     {id: 34343, name: "Igor"},
     {id: 6343, name: "Simone"}
   ];
+
+  ngOnInit() {
+    this.initDistribution();
+  }
 
   articles = [
     {id: 172, title: "Formalizing a Systematic Review Updating Process"},
@@ -41,8 +42,15 @@ export class ExtractionDistributionComponent implements OnInit {
   onChange(extractor:string, article:string, isChecked: boolean) {
     if(isChecked){
       this.distribution[extractor].push(article);
+    }else{
+      this.distribution[extractor].pop(article);
     }
-    console.log(extractor + ":::" + article + ":::" + isChecked)
+  }
+
+  initDistribution(){
+    this.extractors.forEach(ex => {
+      this.distribution[ex.id] = [];
+    });
   }
 
 }
