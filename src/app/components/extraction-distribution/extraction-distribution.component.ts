@@ -22,10 +22,10 @@ export class ExtractionDistributionComponent implements OnInit {
   distribution = {};
 
   extractors = [
-    {id: 4343, name: "Antônio"},
-    {id: 54332, name: "Edmo"},
-    {id: 34343, name: "Igor"},
-    {id: 6343, name: "Simone"}
+    {id: "01", name: "Antônio"},
+    {id: "02", name: "Edmo"},
+    {id: "03", name: "Igor"},
+    {id: "04", name: "Simone"}
   ];
 
   ngOnInit() {
@@ -33,15 +33,15 @@ export class ExtractionDistributionComponent implements OnInit {
   }
 
   articles = [
-    {id: 172, title: "Formalizing a Systematic Review Updating Process"},
-    {id: 151, title:"Linked data approach for selection process automation in systematic reviews"},
-    {id: 12, title:"A Visual Text Mining approach for Systematic Reviews"},
-    {id: 15, title:"Investigating the Use of a Hybrid Search Strategy for Systematic Reviews"},
-    {id: 512, title:"Search Engine Overlaps : Do they agree or disagree?"},
-    {id: 112, title:"Systematic literature reviews in software engineering: Preliminary results from interviews with researchers"},
-    {id: 72, title:"Motivation to Perform Systematic Reviews and their Impact on Software Engineering Practice"},
-    {id: 142, title:"Repeatability of systematic literature reviews"},
-    {id: 212, title:"Data Sampling and Supervised Learning for HIV Literature Screening"}
+    {id: "172", title: "Formalizing a Systematic Review Updating Process"},
+    {id: "151", title:"Linked data approach for selection process automation in systematic reviews"},
+    {id: "12", title:"A Visual Text Mining approach for Systematic Reviews"},
+    {id: "15", title:"Investigating the Use of a Hybrid Search Strategy for Systematic Reviews"},
+    {id: "512", title:"Search Engine Overlaps : Do they agree or disagree?"},
+    {id: "112", title:"Systematic literature reviews in software engineering: Preliminary results from interviews with researchers"},
+    {id: "72", title:"Motivation to Perform Systematic Reviews and their Impact on Software Engineering Practice"},
+    {id: "142", title:"Repeatability of systematic literature reviews"},
+    {id: "212", title:"Data Sampling and Supervised Learning for HIV Literature Screening"}
   ];
 
   onChange(extractor:string, article:string, isChecked: boolean) {
@@ -77,13 +77,51 @@ export class ExtractionDistributionComponent implements OnInit {
   }
 
   randomDistribution(){
-    let elem:Element = document.getElementById("1724343")
-    this.renderer.setProperty (elem, "checked", false);
+    //let elem:Element = document.getElementById("1724343")
+   // this.renderer.setProperty (elem, "checked", false);
 
-    
-    console.log(elem);
-    
+    let num = this.amount;
+    let fullDistribution = [];
+    while(num>0){
+      fullDistribution = fullDistribution.concat(this.articles);
+      num--;
+    }
+    this.shuffleArray(fullDistribution);
+    console.log(fullDistribution);
+    let cont = 0;
+    while( fullDistribution.length > 0) {
+      let currentArticle = fullDistribution.pop();
+      let currentExtractor: string = this.extractors[(cont % this.extractors.length)].id;
+
+      if(this.distribution[currentExtractor].indexOf(currentArticle.id) == -1){
+        this.distribution[currentExtractor].push(currentArticle.id);
+        cont++;
+        console.log("id ex::" + currentExtractor + 'id art:::'+ currentArticle.id);
+      }else{
+        fullDistribution.unshift(currentArticle);
+        console.log("FALHA === id ex::" + currentExtractor + 'id art:::'+ currentArticle.id)
+      }
+    }    
+    this.updateCheckbox();
   }
 
+  shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]]; // eslint-disable-line no-param-reassign
+    }
+    return array;
+  }
 
+  updateCheckbox(){
+    this.extractors.forEach(ex => {
+      console.log(ex);
+      this.distribution[ex.id].forEach(art => {
+        let elem:Element = document.getElementById(art+ex.id)
+        console.log(ex.id + '<>' + art);
+        this.renderer.setProperty (elem, "checked", true);
+        this.alertService.success("Random distribution completed!", false);
+      });
+    });
+  }
 }
