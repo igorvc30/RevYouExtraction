@@ -21,7 +21,7 @@
         <td>{{art.id}}</td>
         <td>{{art.title}}</td>
         <td *ngFor="let ex of extractors; let i = index">
-          <input class="form-check-input" type="checkbox" id="{{ex.id}}" value="{{art.id}}"
+          <input class="form-check-input" type="checkbox" id="{{art.id+''+ex.id}}" 
           (change)="onChange(ex.id, art.id, $event.target.checked)">
         </td>
       </tr>
@@ -29,3 +29,18 @@
   </table>
 </div>
 {{distribution | json}}
+
+<div class="row">
+  <button type="button" class="btn btn-success pull-left" (click)="teste()">
+    <i class="fa fa-dice-two"></i> Random Distribution
+  </button>
+
+  <button type="button" class="btn btn-warning">
+    <i class="fa fa-dice"></i> Avoid Selection Studies
+  </button>
+
+  <button type="button" class="btn btn-primary pull-right1">
+    <i class="fa fa-recycle"></i> Load Selection Studies
+  </button>
+</div>
+

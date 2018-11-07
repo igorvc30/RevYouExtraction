@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AlertService } from '../../services/alert-service';
+
 
 
 @Component({
@@ -10,7 +12,10 @@ import { ActivatedRoute } from '@angular/router';
 export class ExtractionDistributionComponent implements OnInit {
 
   id:number;
-  constructor(private route: ActivatedRoute) {
+  amount:number = 2;
+  constructor(private route: ActivatedRoute, 
+    private renderer: Renderer2,
+    private alertService : AlertService) {
     route.params.subscribe(_ => this.id = _.id);
   }
 
@@ -41,10 +46,28 @@ export class ExtractionDistributionComponent implements OnInit {
 
   onChange(extractor:string, article:string, isChecked: boolean) {
     if(isChecked){
-      this.distribution[extractor].push(article);
+      if(this.contSelectedArticles(article) < this.amount)
+        this.distribution[extractor].push(article);
+      else{
+        let elem:Element = document.getElementById(article + '' + extractor)
+        this.renderer.setProperty (elem, "checked", false);
+        this.alertService.error("Due to the article extraction amount, it's not possible to select article #" + article, false);
+      }
+
     }else{
       this.distribution[extractor].pop(article);
     }
+  }
+
+  contSelectedArticles(article: string){
+    let cont = 0;
+    this.extractors.forEach(ex => {
+      this.distribution[ex.id].forEach(element => {
+        if(element === article)
+          cont++;
+      });
+    });
+    return cont;
   }
 
   initDistribution(){
@@ -52,5 +75,15 @@ export class ExtractionDistributionComponent implements OnInit {
       this.distribution[ex.id] = [];
     });
   }
+
+  randomDistribution(){
+    let elem:Element = document.getElementById("1724343")
+    this.renderer.setProperty (elem, "checked", false);
+
+    
+    console.log(elem);
+    
+  }
+
 
 }
