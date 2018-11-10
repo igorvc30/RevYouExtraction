@@ -44,41 +44,47 @@ export class ExtractionDistributionComponent implements OnInit {
     {id: "212", title:"Data Sampling and Supervised Learning for HIV Literature Screening"}
   ];
 
-  onChange(extractor:string, article:string, isChecked: boolean) {
+  onChange(extractorId:string, articleId:string, isChecked: boolean) {
     if(isChecked){
-      if(this.contSelectedArticles(article) < this.amount)
-        this.distribution[extractor].push(article);
-      else{
-        let elem:Element = document.getElementById(article + '' + extractor)
+      if(this.countSelectedArticles(articleId) < this.amount){
+        this.distribution[extractorId].add(articleId);
+        console.log(this.distribution);
+        console.log("aPUSH:::"+ extractorId + '>>>'+ articleId);
+      }else{
+        let elem:Element = document.getElementById(articleId + extractorId)
         this.renderer.setProperty (elem, "checked", false);
-        this.alertService.error("Due to the article extraction amount, it's not possible to select article #" + article, false);
+        this.alertService.error("Due to the article extraction amount, it's not possible to select article #" + articleId, false);
+        console.log("uncheck::" + extractorId + '>>>'+ articleId);
+        console.log(this.distribution);
+        this.countSelectedArticles(articleId);
       }
-
     }else{
-      this.distribution[extractor].pop(article);
+      this.distribution[extractorId].delete(articleId);
+      console.log("remove::: " + extractorId + '>>>'+ articleId);
+      console.log(this.distribution);
     }
   }
 
-  contSelectedArticles(article: string){
-    let cont = 0;
+  countSelectedArticles(articleId: string){
+    let count = 0;
     this.extractors.forEach(ex => {
-      this.distribution[ex.id].forEach(element => {
-        if(element === article)
-          cont++;
-      });
+      count += this.distribution[ex.id].has(articleId)? 1 : 0;
     });
-    return cont;
+    console.log("selectedArticles::" + count)
+    return count;
   }
 
   initDistribution(){
     this.extractors.forEach(ex => {
-      this.distribution[ex.id] = [];
+      this.distribution[ex.id] = new Set();
     });
   }
 
   randomDistribution(){
     //let elem:Element = document.getElementById("1724343")
    // this.renderer.setProperty (elem, "checked", false);
+    this.initDistribution();
+    this.clearCheckbox();
 
     let num = this.amount;
     let fullDistribution = [];
@@ -88,18 +94,25 @@ export class ExtractionDistributionComponent implements OnInit {
     }
     this.shuffleArray(fullDistribution);
     console.log(fullDistribution);
-    let cont = 0;
+    let count = 0;
+    let trackStucked = 0;
     while( fullDistribution.length > 0) {
       let currentArticle = fullDistribution.pop();
-      let currentExtractor: string = this.extractors[(cont % this.extractors.length)].id;
+      let currentExtractor: string = this.extractors[(count % this.extractors.length)].id;
 
-      if(this.distribution[currentExtractor].indexOf(currentArticle.id) == -1){
-        this.distribution[currentExtractor].push(currentArticle.id);
-        cont++;
+      if (trackStucked > fullDistribution.length){
+        trackStucked = 0;
+        count++;
+      }
+
+      if(this.distribution[currentExtractor].has(currentArticle.id)){
+        this.distribution[currentExtractor].add(currentArticle.id);
+        count++;
         console.log("id ex::" + currentExtractor + 'id art:::'+ currentArticle.id);
       }else{
         fullDistribution.unshift(currentArticle);
-        console.log("FALHA === id ex::" + currentExtractor + 'id art:::'+ currentArticle.id)
+        trackStucked++;
+        console.log("FALHA === id ex::" + currentExtractor + 'id art:::'+ currentArticle.id + '::: X' + trackStucked)
       }
     }    
     this.updateCheckbox();
@@ -121,6 +134,15 @@ export class ExtractionDistributionComponent implements OnInit {
         console.log(ex.id + '<>' + art);
         this.renderer.setProperty (elem, "checked", true);
         this.alertService.success("Random distribution completed!", false);
+      });
+    });
+  }
+
+  clearCheckbox(){
+    this.extractors.forEach(ex => {
+      this.articles.forEach(art => {
+        let elem:Element = document.getElementById(art.id + ex.id)
+        this.renderer.setProperty (elem, "checked", false);
       });
     });
   }
